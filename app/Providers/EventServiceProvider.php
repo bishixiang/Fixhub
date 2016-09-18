@@ -47,6 +47,7 @@ class EventServiceProvider extends ServiceProvider
         JsonWebTokenExpired::class  => [CreateJwt::class],
         Login::class                => [CreateJwt::class],
         Logout::class               => [ClearJwt::class],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => ['SocialiteProviders\GitLab\GitLabExtendSocialite@handle',],
     ];
 
     /**

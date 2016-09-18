@@ -95,6 +95,31 @@ class AuthController extends Controller
     }
 
     /**
+     * Shows the provider redirect.
+     *
+     * @return Response
+     */
+    public function provider($slug)
+    {
+        return \Socialite::with($slug)->redirect();
+    }
+
+    /**
+     * Handle an incomming callback
+     *
+     * @return Response
+     */
+    public function callback($slug)
+    {
+        try {
+            $extern_user = \Socialite::with($slug)->user();
+            \Info::info($extern_user);
+        } catch(InvalidStateException $e) {
+            return Redirect::to('/auth/login');
+        }
+    }
+
+    /**
      * Shows the 2FA form.
      *
      * @return Response
